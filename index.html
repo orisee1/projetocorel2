@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Final de CorelDRAW | Escola TreinaCamp</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <script>
+        // Script de verificação de autenticação para a página principal (index.html)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar se o usuário está autenticado usando sessionStorage
+            const isAuthenticated = sessionStorage.getItem('authenticated');
+            
+            // Verificar se a sessão expirou (se tiver configurado timestamp de expiração)
+            const sessionExpires = sessionStorage.getItem('sessionExpires');
+            let isSessionExpired = false;
+            
+            if (sessionExpires && Date.now() > parseInt(sessionExpires)) {
+                console.log('A sessão expirou');
+                sessionStorage.removeItem('authenticated');
+                sessionStorage.removeItem('sessionExpires');
+                isSessionExpired = true;
+            }
+            
+            // Log para depuração
+            console.log('Status de autenticação:', isAuthenticated);
+            
+            // Se não estiver autenticado, redirecionar para a página de login
+            if (isAuthenticated !== 'true') {
+                // Redirecionar com parâmetro adicional se a sessão expirou
+                if (isSessionExpired) {
+                    window.location.href = 'login.html?expired=true';
+                } else {
+                    window.location.href = 'login.html';
+                }
+            } else {
+                console.log('Usuário autenticado, permanecendo na página principal');
+                
+                // Opcional: Exibir nome do usuário se disponível
+                const username = sessionStorage.getItem('username');
+                const userDisplayElement = document.getElementById('username-display');
+                if (username && userDisplayElement) {
+                    userDisplayElement.textContent = username;
+                }
+            }
+            
+            // Adicionar funcionalidade ao botão de logout (se existir)
+            const logoutButton = document.getElementById('logout-button');
+            if (logoutButton) {
+                logoutButton.addEventListener('click', function() {
+                    // Remover dados de autenticação
+                    sessionStorage.removeItem('authenticated');
+                    sessionStorage.removeItem('username');
+                    sessionStorage.removeItem('sessionExpires');
+                    
+                    // Redirecionar para a página de login com parâmetro de logout
+                    window.location.href = 'login.html?logout=true';
+                });
+            }
+        });
+        </script>
+
+    <nav class="main-nav">
+        <div class="container">
+            <div class="logo">
+                <a href="https://www.treinacamp.com.br" target="_blank">
+                    <img src="\\192.168.15.2\Pedagogico\Projeto Final\CorelDRAW\recursos\TC.png" alt="Logo TreinaCamp">
+                </a>
+            </div>
+            <div class="menu-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#intro" class="active">Início</a></li>
+                <li><a href="#components">Componentes</a></li>
+                <li><a href="#entrega">Entregas</a></li>
+                <li><a href="#avaliacao">Avaliação</a></li>
+                <li><a href="#diicas</a></li>
+                <li><a href="#recursos">Recursos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="badge">Projeto Final</div>
+                <h1>🎨 Identidade Visual com CorelDRAW</h1>
+                <h2>Demonstre suas habilidades criando um portfólio profissional</h2>
+                <div class="cta-buttons">
+                    <a href="#intro" class="btn btn-primary">Ver Detalhes</a>
+                    <a href="#dicas" class="btn btn-secondary">Dicas e Recursos</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <!-- img src="/api/placeholder/600/400" alt="Exemplo de projeto finalizado" -->
+            </div>
+        </div>
+        <div class="wave-divider">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                <path fill="#ffffff" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,117.3C672,107,768,117,864,138.7C960,160,1056,192,1152,197.3C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+    </header>
+
+    <main>
+        <section id="intro" class="intro-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">Projeto</span>
+                    <h2>Identidade Visual para "EcoVerde Jardinagem"</h2>
+                    <p class="section-subtitle">Empresa de Paisagismo e Jardinagem</p>
+                </div>
+                
+                <div class="intro-cards">
+                    <div class="intro-card">
+                        <div class="card-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3>Objetivos do Projeto</h3>
+                        <p>Neste projeto final, você demonstrará todos os conhecimentos adquiridos durante o curso de CorelDRAW, criando uma identidade visual completa para uma empresa fictícia de jardinagem e paisagismo.</p>
+                    </div>
+                    <div class="intro-card">
+                        <div class="card-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3>Habilidades Demonstradas</h3>
+                        <p>Você aplicará todas as técnicas de desenho vetorial, tipografia, cores e composição que aprendeu ao longo do curso, mostrando sua capacidade de criar designs profissionais.</p>
+                    </div>
+                    <div class="intro-card">
+                        <div class="card-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <h3>Entrega Final</h3>
+                        <p>O projeto completo incluirá logo, cartão de visitas, flyer promocional, arte para redes sociais e um manual básico da marca, tudo aplicando a identidade visual da EcoVerde.</p>
+                    </div>
+                </div>
+                
+                <div class="intro-timeline">
+                    <h3>Cronograma Sugerido</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-marker">1</div>
+                            <div class="timeline-content">
+                                <h4>Dia 1-2</h4>
+                                <p>Planejamento e esboço da identidade visual</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker">2</div>
+                            <div class="timeline-content">
+                                <h4>Dia 3-5</h4>
+                                <p>Criação da logomarca e definição da paleta de cores</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker">3</div>
+                            <div class="timeline-content">
+                                <h4>Dia 6-8</h4>
+                                <p>Desenvolvimento do cartão e flyer</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker">4</div>
+                            <div class="timeline-content">
+                                <h4>Dia 9-10</h4>
+                                <p>Criação da arte para redes sociais e manual da marca</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker">5</div>
+                            <div class="timeline-content">
+                                <h4>Dia 11-12</h4>
+                                <p>Revisão final e exportação dos arquivos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="config" class="config-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">Especificações</span>
+                    <h2>Configurações do Projeto</h2>
+                    <p class="section-subtitle">Configurações técnicas para seu arquivo CorelDRAW</p>
+                </div>
+                
+                <div class="config-cards">
+                    <div class="config-card">
+                        <div class="config-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3>Tamanho da página</h3>
+                        <p>A4 (210mm x 297mm) - Horizontal</p>
+                    </div>
+                    <div class="config-card">
+                        <div class="config-icon">
+                            <i class="fas fa-ruler-combined"></i>
+                        </div>
+                        <h3>Unidade de medida</h3>
+                        <p>Milímetros (mm)</p>
+                    </div>
+                    <div class="config-card">
+                        <div class="config-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h3>Modo de cor</h3>
+                        <p>CMYK</p>
+                    </div>
+                    <div class="config-card">
+                        <div class="config-icon">
+                            <i class="fas fa-expand-arrows-alt"></i>
+                        </div>
+                        <h3>Resolução</h3>
+                        <p>300dpi</p>
+                    </div>
+                    <div class="config-card">
+                        <div class="config-icon">
+                            <i class="fas fa-crop-alt"></i>
+                        </div>
+                        <h3>Margens</h3>
+                        <p>10mm de cada lado</p>
+                    </div>
+                    <div class="config-card">
+                        <div class="config-icon">
+                            <i class="fas fa-save"></i>
+                        </div>
+                        <h3>Formato</h3>
+                        <p>CDR (arquivo original do CorelDRAW)</p>
+                    </div>
+                </div>
+                
+                <div class="color-palette">
+                    <h3>Paleta de cores sugerida</h3>
+                    <div class="color-swatches">
+                        <div class="color-swatch">
+                            <div class="swatch" style="background-color: #1b5e20;"></div>
+                            <div class="swatch-details">
+                                <p class="swatch-name">Verde escuro</p>
+                                <p class="swatch-cmyk">C:85 M:10 Y:100 K:10</p>
+                            </div>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="swatch" style="background-color: #4caf50;"></div>
+                            <div class="swatch-details">
+                                <p class="swatch-name">Verde médio</p>
+                                <p class="swatch-cmyk">C:50 M:0 Y:100 K:0</p>
+                            </div>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="swatch" style="background-color: #8bc34a;"></div>
+                            <div class="swatch-details">
+                                <p class="swatch-name">Verde claro</p>
+                                <p class="swatch-cmyk">C:25 M:0 Y:80 K:0</p>
+                            </div>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="swatch" style="background-color: #795548;"></div>
+                            <div class="swatch-details">
+                                <p class="swatch-name">Marrom</p>
+                                <p class="swatch-cmyk">C:30 M:70 Y:100 K:30</p>
+                            </div>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="swatch" style="background-color: #e8f5e9;"></div>
+                            <div class="swatch-details">
+                                <p class="swatch-name">Verde pálido</p>
+                                <p class="swatch-cmyk">C:5 M:0 Y:5 K:0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="tools" class="tools-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">Ferramentas</span>
+                    <h2>Ferramentas Obrigatórias</h2>
+                    <p class="section-subtitle">Aplique estes recursos do CorelDRAW em seu projeto</p>
+                </div>
+                
+                <div class="tools-tabs">
+                    <div class="tabs-header">
+                        <button class="tab-btn active" data-tab="desenho">Desenho e Formas</button>
+                        <button class="tab-btn" data-tab="manipulacao">Manipulação</button>
+                        <button class="tab-btn" data-tab="texto">Texto e Estilo</button>
+                        <button class="tab-btn" data-tab="efeitos">Efeitos e Exportação</button>
+                    </div>
+                    
+                    <div class="tabs-content">
+                        <div class="tab-pane active" id="desenho">
+                            <div class="tool-cards">
+                                <div class="tool-card">
+                                    <div class="tool-icon">
+                                        <i class="fas fa-square"></i>
+                                    </div>
+                                    <h4>Formas Básicas</h4>
+                                    <p>Retângulo, Elipse, Polígono, Estrela e outras formas geométricas fundamentais</p>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-icon">
+                                        <i class="fas fa-pen"></i>
+                                    </div>
+                                    <h4>Ferramentas Bézier e Caneta</h4>
+                                    <p>Criação de curvas e linhas personalizadas com controle preciso de nós</p>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-icon">
+                                        <i class="fas fa-vector-square"></i>
+                                    </div>
+                                    <h4>Edição de Nós</h4>
+                                    <p>Modificação avançada de curvas e pontos de ancoragem para formas personalizadas</p>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-icon">
+                                        <i class="fas fa-object-group"></i>
+                                    </div>
+                                    <h4>Operações entre Formas</h4>
+                                    <p>Soldar, aparar, interseção e outras operações booleanas entre objetos</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane" id="manipulacao">
+                            <div class="tool-cards">
+                                <div class="tool-card">
+                                    <div class="tool-icon">
+                                        <i class="fas fa-sync"></i>
+                                    </div>
+                                    <h4>Ferramentas de Transformação</h4>
+                                    <p>Rotacionar, Espelhar, Escalar e Distorcer objetos com precisão</p>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-icon">
+                                        <i class="fas fa-layer-group"></i>
+                                    </div>
+                                    <h4>Camadas e Objetos</h4>
+                                    <p>Organização hierárquica de elementos para facilitar a edição e visualização</p>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-icon">
+                                        <i class="fas fa-object-ungroup"></i>
+                                    </div>
+                                    <h4>Agrupamento de Objetos</h4>
+                                    <p>Agrupar elementos relacionados para manipulá-los como uma unidade</p>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-icon">
+                                        <i class="fas fa-align-center"></i>
+                                    </div>
+                                    <h4>Alinhamento e Distribuição</h4>
+                                    <p>Alinhar e distribuir objetos com precisão usando referências e grades guias</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane" id="texto">
+                            <div class="tool-cards">
+                                <div class="tool-card">
+                                    <div class="tool-icon">
+                                        <i class="fas fa-font"></i>
+                                    </div>
+                                    <h4>Texto Artístico</h4>
+                                    <p>Texto decorativo ideal para títulos, logotipos e elementos criativos</p>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-icon">
+                                        <i class="fas fa-align-left"></i>
+                                    </div>
+                                    <h4>Texto de Parágrafo</h4>
+                                    <p>Blocos de texto formatados para conteúdo informativo e descritivo</p>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-icon">
+                                        <i class="fas fa-fill-drip"></i>
+                                    </div>
+                                    <h4>Preenchimentos</h4>
+                                    <p>Aplicação de cores sólidas, degradês e padrões em objetos e textos</p>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-icon">
+                                        <i class="fas fa-border-style"></i>
+                                    </div>
+                                    <h4>Contornos</h4>
+                                    <p>Personalização de bordas com diferentes estilos, espessuras e cores</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane" id="efeitos">
+                            <div class="tool-cards">
+                                <div class="tool-card">
+                                    <div class="tool-icon">
+                                        <i class="fas fa-clone"></i>
+                                    </div>
+                                    <h4>PowerClip</h4>
+                                    <p>Inserção de conteúdo dentro de formas para efeitos de máscara e composição</p>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-icon">
+                                        <i class="fas fa-image"></i>
+                                    </div>
+                                    <h4>PowerTRACE</h4>
+                                    <p>Conversão de imagens bitmap para vetores com controles de qualidade</p>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-icon">
+                                        <i class="fas fa-cube"></i>
+                                    </div>
+                                    <h4>Efeitos 3D</h4>
+                                    <p>Sombra, Transparência e Extrusão para adicionar profundidade aos elementos</p>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-icon">
+                                        <i class="fas fa-file-export"></i>
+                                    </div>
+                                    <h4>Exportação</h4>
+                                    <p>Salvar em formatos JPG, PNG e PDF para diferentes aplicações</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="components" class="components-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">Componentes</span>
+                    <h2>Peças do Projeto</h2>
+                    <p class="section-subtitle">Crie estes 5 elementos para compor sua identidade visual</p>
+                </div>
+                
+                <div class="component-accordion">
+                    <div class="accordion-item active">
+                        <div class="accordion-header">
+                            <div class="accordion-icon">1</div>
+                            <h3>Logomarca "EcoVerde Jardinagem"</h3>
+                            <div class="accordion-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="component-details">
+                                <div class="component-instructions">
+                                    <h4>Instruções:</h4>
+                                    <ul>
+                                        <li>Crie um logo usando elementos que remetam à jardinagem e sustentabilidade</li>
+                                        <li>Utilize a combinação de formas geométricas (soldar, aparar, interseção)</li>
+                                        <li>Aplique uma fonte adequada para o texto "EcoVerde Jardinagem"</li>
+                                        <li>Crie uma versão colorida e uma versão monocromática (preto e branco)</li>
+                                        <li>Utilize efeito de contorno para dar destaque à marca</li>
+                                        <li>Utilize a ferramenta de edição de nós para customizar pelo menos uma forma</li>
+                                    </ul>
+                                </div>
+                                <div class="component-specs">
+                                    <h4>Especificações Técnicas:</h4>
+                                    <ul>
+                                        <li>Tamanho: 80mm x 80mm</li>
+                                        <li>Utilize a paleta de cores sugerida na seção de Configurações</li>
+                                        <li>Exportar em formato CDR, PDF e PNG (fundo transparente)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="component-preview">
+                                <div class="preview-tabs">
+                                    <button class="preview-tab active" data-preview="logo-color">Versão Colorida</button>
+                                    <button class="preview-tab" data-preview="logo-bw">Versão P&B</button>
+                                </div>
+                                <div class="preview-content">
+                                    <div class="preview-item active" id="logo-color">
+                                        <img src="\\192.168.15.2\Pedagogico\Projeto Final\CorelDRAW\recursos\logo.png" alt="Exemplo de Logo Colorido">
+                                    </div>
+                                    <div class="preview-item" id="logo-bw">
+                                        <img src="\\192.168.15.2\Pedagogico\Projeto Final\CorelDRAW\recursos\EcoVerdePB.png" alt="Exemplo de Logo P&B">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <div class="accordion-icon">2</div>
+                            <h3>Cartão de Visitas</h3>
+                            <div class="accordion-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="component-details">
+                                <div class="component-instructions">
+                                    <h4>Instruções:</h4>
+                                    <ul>
+                                        <li>Crie um cartão de visitas frente e verso utilizando a logo desenvolvida</li>
+                                        <li>Utilize alinhamento adequado para os elementos</li>
+                                        <li>Aplique efeito de sombra ou transparência em algum elemento decorativo</li>
+                                        <li>Organize os elementos em camadas diferenciadas</li>
+                                        <li>Utilize uma grade de guias para alinhamento preciso</li>
+                                    </ul>
+                                </div>
+                                <div class="component-specs">
+                                    <h4>Especificações Técnicas:</h4>
+                                    <ul>
+                                        <li>Tamanho: 90mm x 50mm</li>
+                                        <li>Frente: Logo, nome da empresa, slogan "Cultivando beleza natural"</li>
+                                        <li>Verso: Dados de contato:
+                                            <ul>
+                                                <li>Nome: Carlos Silva (Paisagista)</li>
+                                                <li>Telefone: (11) 98765-4321</li>
+                                                <li>Email: contato@ecoverde.com.br</li>
+                                                <li>Site: www.ecoverde.com.br</li>
+                                                <li>Endereço: Av. das Flores, 123 - Jardim Botânico</li>
+                                                <li>Redes sociais: @ecoVerdeJardinagem</li>
+                                            </ul>
+                                        </li>
+                                        <li>Exportar em formato CDR, PDF e JPG</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="component-preview">
+                                <div class="preview-tabs">
+                                    <button class="preview-tab active" data-preview="cartao-frente">Frente</button>
+                                    <button class="preview-tab" data-preview="cartao-verso">Verso</button>
+                                </div>
+                                <div class="preview-content">
+                                    <div class="preview-item active" id="cartao-frente">
+                                        <img src="\\192.168.15.2\Pedagogico\Projeto Final\CorelDRAW\recursos\peças do projeto\cartaodevisita.png" alt="Exemplo de Cartão - Frente">
+                                    </div>
+                                    <div class="preview-item" id="cartao-verso">
+                                        <img src="\\192.168.15.2\Pedagogico\Projeto Final\CorelDRAW\recursos\peças do projeto\versocartaodevisita.png" alt="Exemplo de Cartão - Verso">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <div class="accordion-icon">3</div>
+                            <h3>Flyer Promocional</h3>
+                            <div class="accordion-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="component-details">
+                                <div class="component-instructions">
+                                    <h4>Instruções:</h4>
+                                    <ul>
+                                        <li>Crie um flyer promocional para o serviço "Jardim em 7 dias"</li>
+                                        <li>Utilize a logo e os elementos da identidade visual</li>
+                                        <li>Crie um fundo com degradê radial (do centro para as bordas)</li>
+                                        <li>Aplique um efeito de extrusão em algum elemento de texto</li>
+                                        <li>Importe e vetorize uma imagem usando PowerTRACE (ex: uma planta ou flor)</li>
+                                        <li>Utilize PowerClip para inserir uma imagem dentro de uma forma</li>
+                                    </ul>
+                                </div>
+                                <div class="component-specs">
+                                    <h4>Especificações Técnicas:</h4>
+                                    <ul>
+                                        <li>Tamanho: A5 (148mm x 210mm) - Vertical</li>
+                                        <li>Título: "Transforme seu espaço com a EcoVerde"</li>
+                                        <li>Subtítulo: "Jardim completo em apenas 7 dias"</li>
+                                        <li>Conteúdo: Breve descrição do serviço, lista de benefícios, preço promocional</li>
+                                        <li>Criar um QR Code que direcionaria para o site</li>
+                                        <li>Exportar em formato CDR, PDF e JPG</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="component-preview">
+                                <div class="preview-content single">
+                                    <div class="preview-item active">
+                                        <img src="\\192.168.15.2\Pedagogico\Projeto Final\CorelDRAW\recursos\peças do projeto\flyerecoverde.png" alt="Exemplo de Flyer Promocional">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <div class="accordion-icon">4</div>
+                            <h3>Arte para Capa de Redes Sociais</h3>
+                            <div class="accordion-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="component-details">
+                                <div class="component-instructions">
+                                    <h4>Instruções:</h4>
+                                    <ul>
+                                        <li>Crie uma capa para Facebook utilizando os elementos da identidade visual</li>
+                                        <li>Aplique um efeito de transparência para sobreposição de camadas</li>
+                                        <li>Utilize textos artísticos com efeitos</li>
+                                        <li>Aplique um fundo com padrão personalizado</li>
+                                        <li>Posicione elementos respeitando a área segura da capa</li>
+                                    </ul>
+                                </div>
+                                <div class="component-specs">
+                                    <h4>Especificações Técnicas:</h4>
+                                    <ul>
+                                        <li>Tamanho: 820px x 312px (Facebook)</li>
+                                        <li>Slogan: "Transformando espaços, cultivando vida"</li>
+                                        <li>Área de segurança: considere que 144px em cada lateral pode ser cortada em visualizações mobile</li>
+                                        <li>Exportar em formato CDR, PDF, JPG e PNG</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="component-preview">
+                                <div class="preview-content single">
+                                    <div class="preview-item active">
+                                        <img src="\\192.168.15.2\Pedagogico\Projeto Final\CorelDRAW\recursos\peças do projeto\capafacebook.png" alt="Exemplo de Capa para Redes Sociais">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <div class="accordion-icon">5</div>
+                            <h3>Manual Básico da Marca</h3>
+                            <div class="accordion-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="component-details">
+                                <div class="component-instructions">
+                                    <h4>Instruções:</h4>
+                                    <ul>
+                                        <li>Crie um manual básico de uma página apresentando a identidade visual</li>
+                                        <li>Organize elementos em uma grade de 3x3</li>
+                                        <li>Utilize texto artístico para os títulos e texto de parágrafo para descrições</li>
+                                        <li>Aplique cores e estilos consistentes com a identidade visual</li>
+                                        <li>Demonstre exemplos de uso correto e incorreto do logo</li>
+                                    </ul>
+                                </div>
+                                <div class="component-specs">
+                                    <h4>Especificações Técnicas:</h4>
+                                    <ul>
+                                        <li>Tamanho: A4 (210mm x 297mm) - Vertical</li>
+                                        <li>Seções do manual:
+                                            <ul>
+                                                <li>Logo principal (colorido)</li>
+                                                <li>Logo monocromático (P&B)</li>
+                                                <li>Paleta de cores (códigos CMYK)</li>
+                                                <li>Tipografia utilizada (fontes principal e secundária)</li>
+                                                <li>Exemplos de uso correto</li>
+                                                <li>Exemplos de uso incorreto</li>
+                                            </ul>
+                                        </li>
+                                        <li>Exportar em formato CDR, PDF e JPG</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="component-preview">
+                                <div class="preview-content single">
+                                    <div class="preview-item active">
+                                        <img src="\\192.168.15.2\Pedagogico\Projeto Final\CorelDRAW\recursos\peças do projeto\manualdamarca.png" alt="Exemplo de Manual da Marca">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="entrega" class="entrega-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">Entrega</span>
+                    <h2>Entregas Obrigatórias</h2>
+                    <p class="section-subtitle">O que você deve entregar ao final do projeto</p>
+                </div>
+                
+                <div class="entrega-cards">
+                    <div class="entrega-card">
+                        <div class="entrega-icon">
+                            <i class="fas fa-file"></i>
+                        </div>
+                        <h3>Arquivos Originais</h3>
+                        <ul>
+                            <li>Arquivo CDR com todas as peças</li>
+                            <li>Um arquivo CDR para cada peça individual</li>
+                            <li>Arquivos de fonte utilizados (se não forem padrão)</li>
+                        </ul>
+                    </div>
+                    <div class="entrega-card">
+                        <div class="entrega-icon">
+                            <i class="fas fa-file-export"></i>
+                        </div>
+                        <h3>Arquivos Exportados</h3>
+                        <ul>
+                            <li>PDF de cada peça</li>
+                            <li>PNG do logo (fundo transparente)</li>
+                            <li>JPG das peças gráficas</li>
+                            <li>Versões para web das imagens</li>
+                        </ul>
+                    </div>
+                    <div class="entrega-card">
+                        <div class="entrega-icon">
+                            <i class="fas fa-folder"></i>
+                        </div>
+                        <h3>Organização de Pastas</h3>
+                        <ul>
+                            <li>Pasta principal: "Projeto_Final_CorelDRAW_SeuNome"</li>
+                            <li>Subpastas: Logo / Cartão / Flyer / Capa / Manual</li>
+                            <li>Dentro de cada subpasta: arquivos em CDR, PDF, JPG/PNG</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="entrega-timeline">
+                    <h3>Cronograma de Entrega</h3>
+                    <div class="timeline-entrega">
+                        <div class="timeline-item">
+                            <div class="timeline-date">
+                                <span>Dia 12</span>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Entrega do Logo e Cartão</h4>
+                                <p>Primeira fase da entrega com os elementos base da identidade visual</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">
+                                <span>Dia 18</span>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Entrega do Flyer e Capa</h4>
+                                <p>Segunda fase com as aplicações da identidade visual</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">
+                                <span>Dia 22</span>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Entrega do Manual</h4>
+                                <p>Documentação oficial da identidade visual criada</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">
+                                <span>Dia 25</span>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Apresentação Final</h4>
+                                <p>Apresentação do projeto completo para avaliação</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="avaliacao" class="avaliacao-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">Avaliação</span>
+                    <h2>Critérios de Avaliação</h2>
+                    <p class="section-subtitle">Como seu projeto será avaliado</p>
+                </div>
+                
+                <div class="criterios-grid">
+                    <div class="criterio-card">
+                        <div class="criterio-header">
+                            <div class="criterio-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <h3>Aspectos Técnicos</h3>
+                            <div class="criterio-percent">40%</div>
+                        </div>
+                        <ul>
+                            <li>Uso correto das ferramentas solicitadas</li>
+                            <li>Organização de camadas e objetos</li>
+                            <li>Configurações corretas de página e exportação</li>
+                            <li>Manipulação correta de nós e curvas</li>
+                        </ul>
+                    </div>
+                    <div class="criterio-card">
+                        <div class="criterio-header">
+                            <div class="criterio-icon">
+                                <i class="fas fa-paint-brush"></i>
+                            </div>
+                            <h3>Design e Criatividade</h3>
+                            <div class="criterio-percent">40%</div>
+                        </div>
+                        <ul>
+                            <li>Harmonia de cores e aplicação de efeitos</li>
+                            <li>Equilíbrio visual e composição</li>
+                            <li>Originalidade na criação da marca</li>
+                            <li>Adequação ao tema proposto</li>
+                        </ul>
+                    </div>
+                    <div class="criterio-card">
+                        <div class="criterio-header">
+                            <div class="criterio-icon">
+                                <i class="fas fa-clipboard-check"></i>
+                            </div>
+                            <h3>Apresentação</h3>
+                            <div class="criterio-percent">20%</div>
+                        </div>
+                        <ul>
+                            <li>Organização dos arquivos entregues</li>
+                            <li>Limpeza e capricho na finalização</li>
+                            <li>Qualidade das exportações</li>
+                            <li>Cumprimento de todos os requisitos</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="avaliacao-chart">
+                    <h3>Escala de Avaliação</h3>
+                    <div class="chart-container">
+                        <div class="chart-bar">
+                            <div class="chart-fill" style="width: 20%;">
+                                <span>Insatisfatório</span>
+                            </div>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="chart-fill" style="width: 40%;">
+                                <span>Regular</span>
+                            </div>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="chart-fill" style="width: 60%;">
+                                <span>Bom</span>
+                            </div>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="chart-fill" style="width: 80%;">
+                                <span>Muito Bom</span>
+                            </div>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="chart-fill" style="width: 100%;">
+                                <span>Excelente</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="dicas" class="dicas-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">Dicas</span>
+                    <h2>Dicas para o Sucesso</h2>
+                    <p class="section-subtitle">Recomendações para um projeto excelente</p>
+                </div>
+                
+                <div class="dicas-grid">
+                    <div class="dica-card">
+                        <div class="dica-icon">
+                            <i class="fas fa-pencil-ruler"></i>
+                        </div>
+                        <h3>Planejamento</h3>
+                        <p>Antes de começar, planeje sua marca. Faça rascunhos no papel e pense na paleta de cores que transmita os valores da empresa.</p>
+                    </div>
+                    <div class="dica-card">
+                        <div class="dica-icon">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <h3>Organização</h3>
+                        <p>Utilize camadas devidamente nomeadas para organizar seu projeto. Mantenha elementos diferentes em camadas separadas para facilitar edições.</p>
+                    </div>
+                    <div class="dica-card">
+                        <div class="dica-icon">
+                            <i class="fas fa-save"></i>
+                        </div>
+                        <h3>Backup</h3>
+                        <p>Salve frequentemente e crie versões de backup em diferentes estágios do seu trabalho para evitar perda de dados.</p>
+                    </div>
+                    <div class="dica-card">
+                        <div class="dica-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3>Consistência</h3>
+                        <p>Mantenha a consistência visual em todas as peças. Use as mesmas cores, fontes e estilos para criar uma identidade coesa.</p>
+                    </div>
+                    <div class="dica-card">
+                        <div class="dica-icon">
+                            <i class="fas fa-ruler-combined"></i>
+                        </div>
+                        <h3>Guias e Grades</h3>
+                        <p>Trabalhe com guias e grades para manter o alinhamento e as proporções corretas entre os elementos.</p>
+                    </div>
+                    <div class="dica-card">
+                        <div class="dica-icon">
+                            <i class="fas fa-tags"></i>
+                        </div>
+                        <h3>Nomeação</h3>
+                        <p>Use o gerenciador de objetos para dar nomes descritivos aos elementos, facilitando encontrar e editar itens específicos.</p>
+                    </div>
+                </div>
+                
+                <div class="dicas-quote">
+                    <blockquote>
+                        <p>"O bom design é óbvio. O ótimo design é transparente."</p>
+                        <cite>— Joe Sparano</cite>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+        
+        <section id="recursos" class="recursos-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">Recursos</span>
+                    <h2>Recursos Adicionais</h2>
+                    <p class="section-subtitle">Ferramentas e materiais de apoio</p>
+                </div>
+                
+                <div class="recursos-grid">
+                    <div class="recurso-card">
+                        <div class="recurso-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3>Bibliotecas de Referência</h3>
+                        <p>Acesse nossa biblioteca de exemplos e modelos para inspiração:</p>
+                        <a href="#" class="recurso-link">Acessar Biblioteca Digital</a>
+                    </div>
+
+                    
+
+                    <!-- Modal Biblioteca Digital -->
+<div id="biblioteca-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Biblioteca Digital de Modelos</h2>
+        <p>Confira abaixo exemplos e modelos para inspirar seu projeto:</p>
+        
+        <div class="biblioteca-tabs">
+            <button class="biblioteca-tab active" data-tab="flyers">Flyers</button>
+            <button class="biblioteca-tab" data-tab="logos">Logomarcas</button>
+            <button class="biblioteca-tab" data-tab="cartoes">Cartões de Visita</button>
+            <!-- <button class="biblioteca-tab" data-tab="manuais">Manuais</button> -->
+        </div>
+        
+        <div class="biblioteca-content">
+            <div class="biblioteca-pane active" id="flyers">
+                <div class="galeria-modelos">
+                    <!-- Aqui você vai inserir suas imagens de flyers -->
+                    <div class="modelo-item">
+                        <img src="\\192.168.15.2\Pedagogico\Projeto Final\CorelDRAW\recursos\Flyer1.jpg" alt="Exemplo de Flyer 1">
+                        <div class="modelo-overlay">
+                            <div class="modelo-title">Flyer Promocional</div>
+                        </div>
+                    </div>
+                    <div class="modelo-item">
+                        <img src="\\192.168.15.2\Pedagogico\Projeto Final\CorelDRAW\recursos\Flyer2.jpg" alt="Exemplo de Flyer 2">
+                        <div class="modelo-overlay">
+                            <div class="modelo-title">Flyer Institucional</div>
+                        </div>
+                    </div>
+                    <div class="modelo-item">
+                        <img src="\\192.168.15.2\Pedagogico\Projeto Final\CorelDRAW\recursos\Flyer3.jpg" alt="Exemplo de Flyer 3">
+                        <div class="modelo-overlay">
+                            <div class="modelo-title">Flyer Eventos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="biblioteca-pane" id="logos">
+                <div class="galeria-modelos">
+                    <!-- Aqui você vai inserir suas imagens de logos -->
+                    <div class="modelo-item">
+                        <img src="\\192.168.15.2\Pedagogico\Projeto Final\CorelDRAW\recursos\logo1.jpg" alt="Exemplo de Logo 1">
+                        <div class="modelo-overlay">
+                            <div class="modelo-title">Logo Minimalista</div>
+                        </div>
+                    </div>
+                    <div class="modelo-item">
+                        <img src="\\192.168.15.2\Pedagogico\Projeto Final\CorelDRAW\recursos\logo2.jpg" alt="Exemplo de Logo 2">
+                        <div class="modelo-overlay">
+                            <div class="modelo-title">Logo Moderno</div>
+                        </div>
+                    </div>
+                    <div class="modelo-item">
+                        <img src="\\192.168.15.2\Pedagogico\Projeto Final\CorelDRAW\recursos\logo3.jpg" alt="Exemplo de Logo 3">
+                        <div class="modelo-overlay">
+                            <div class="modelo-title">Logo Corporativo</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="biblioteca-pane" id="cartoes">
+                <div class="galeria-modelos">
+                    <!-- Aqui você vai inserir suas imagens de cartões -->
+                    <div class="modelo-item">
+                        <img src="\\192.168.15.2\Pedagogico\Projeto Final\CorelDRAW\recursos\cartao1.jpg" alt="Exemplo de Cartão 1">
+                        <div class="modelo-overlay">
+                            <div class="modelo-title">Cartão Corporativo</div>
+                        </div>
+                    </div>
+                    <div class="modelo-item">
+                        <img src="\\192.168.15.2\Pedagogico\Projeto Final\CorelDRAW\recursos\cartao2.jpg" alt="Exemplo de Cartão 2">
+                        <div class="modelo-overlay">
+                            <div class="modelo-title">Cartão Criativo</div>
+                        </div>
+                    </div>
+                    <div class="modelo-item">
+                        <img src="\\192.168.15.2\Pedagogico\Projeto Final\CorelDRAW\recursos\cartao3.jpg" alt="Exemplo de Cartão 3">
+                        <div class="modelo-overlay">
+                            <div class="modelo-title">Cartão Premium</div>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+        </div>
+    </div>
+</div>
+
+<!-- Modal Tutoriais -->
+<div id="tutoriais-modal" class="modal">
+    <div class="modal-content tutorial-modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Tutoriais em Vídeo</h2>
+        <p>Selecione um dos tutoriais abaixo para aprender técnicas essenciais para o seu projeto:</p>
+        
+        <div class="tutoriais-grid">
+            <div class="tutorial-item" data-video="\\192.168.15.2\Pedagogico\Projeto Final\CorelDRAW\recursos\videocartao.mp4">
+                <div class="tutorial-frame">
+                    <div class="tutorial-thumbnail">
+                        <img src="\\192.168.15.2\Pedagogico\Projeto Final\CorelDRAW\recursos\cartaoimg.png" alt="Tutorial sobre Cartão de Visitas">
+                        <div class="play-icon">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                    </div>
+                    <div class="corel-icon"></div>
+                </div>
+                <h3>Tutorial de Cartão de Visitas</h3>
+            </div>
+            
+            <div class="tutorial-item" data-video="\\192.168.15.2\Pedagogico\Projeto Final\CorelDRAW\recursos\tutologo.mp4">
+                <div class="tutorial-frame">
+                    <div class="tutorial-thumbnail">
+                        <img src="\\192.168.15.2\Pedagogico\Projeto Final\CorelDRAW\recursos\logoimg.png" alt="Tutorial sobre Logomarca">
+                        <div class="play-icon">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                    </div>
+                    <div class="corel-icon"></div>
+                </div>
+                <h3>Tutorial de Logomarca</h3>
+            </div>
+            
+            <div class="tutorial-item" data-video="\\192.168.15.2\Pedagogico\Projeto Final\CorelDRAW\recursos\flyervideo.mp4">
+                <div class="tutorial-frame">
+                    <div class="tutorial-thumbnail">
+                        <img src="\\192.168.15.2\Pedagogico\Projeto Final\CorelDRAW\recursos\flyerimg.png" alt="Tutorial sobre Flyer">
+                        <div class="play-icon">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                    </div>
+                    <div class="corel-icon"></div>
+                </div>
+                <h3>Tutorial de Flyer</h3>
+            </div>
+        </div>
+        
+        <div class="video-expanded-container" style="display: none;">
+            <div class="video-expanded-wrapper">
+                <div class="video-expanded-frame">
+                    <video controls width="100%" id="expanded-video">
+                        <source src="" type="video/mp4">
+                        Seu navegador não suporta a reprodução de vídeos.
+                    </video>
+                    <div class="corel-icon large"></div>
+                </div>
+                <button class="close-video-btn"><i class="fas fa-times"></i> Fechar Vídeo</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+                    <div class="recurso-card">
+                        <div class="recurso-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3>Tutoriais em Vídeo</h3>
+                        <p>Revise técnicas específicas com nossos tutoriais em vídeo:</p>
+                        <a href="#" class="recurso-link">Ver Tutoriais</a>
+                    </div>
+                    <div class="recurso-card">
+                        <div class="recurso-icon">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <h3>Downloads Úteis</h3>
+                        <p>Recursos gratuitos para seu projeto:</p>
+                        <ul>
+                            <li><a href="https://drive.google.com/file/d/10Rlu8-vhXBhhVLYYY2NsO7hf4j--DO2L/view?usp=sharing" target="_blank">Paletas de cores CMYK</a></li>
+                            <li><a href="https://drive.google.com/file/d/1TGQHhlgB4JoR2q6BPmlXUbqiMYKQIgZ0/view?usp=sharing" target="_blank">Modelos de mockup</a></li>
+                            <li><a href="#">Fontes Livre escolha</a></li>
+                        </ul>
+                    </div>
+                    <div class="recurso-card">
+                        <div class="recurso-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <h3>Suporte ao Aluno</h3>
+                        <p>Precisa de ajuda? Entre em contato:</p>
+                        <ul>
+                            <li>Email: suporte@treinacamp.com.br</li>
+                            <li>Horário de plantão: Seg-Sex, 14h às 18h</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="faq-section">
+                    <h3>Perguntas Frequentes</h3>
+                    <div class="faq-accordion">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Posso usar imagens da internet no meu projeto?</h4>
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Sim, desde que sejam imagens de domínio público ou com licença livre. Recomendamos sites como Unsplash, Pexels ou Pixabay. Sempre verifique as licenças de uso e dê os devidos créditos quando necessário.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Posso usar fontes diferentes das instaladas no laboratório?</h4>
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Sim, mas lembre-se de incluir os arquivos das fontes utilizadas na entrega final. Caso contrário, ao abrir o arquivo em outro computador, o CorelDRAW substituirá suas fontes por outras disponíveis no sistema.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Como faço para converter textos em curvas?</h4>
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Selecione o texto que deseja converter e use o comando Converter em Curvas (Ctrl+Q). Isso transforma o texto em objetos vetoriais, preservando a aparência mesmo sem a fonte instalada. Lembre-se que após converter, o texto não poderá mais ser editado como texto.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Qual versão do CorelDRAW devo utilizar?</h4>
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>O projeto foi planejado para ser desenvolvido na versão X8 ou superior do CorelDRAW. Caso utilize uma versão mais recente, lembre-se de salvar uma cópia compatível com X8 para garantir que possamos abrir seu arquivo durante a avaliação.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <h3>TreinaCamp</h3>
+                        <p>Escola de design e tecnologia focada em capacitação profissional para o mercado criativo.</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Links Rápidos</h3>
+                        <ul>
+                            <li><a href="#intro">Projeto</a></li>
+                            <li><a href="#components">Componentes</a></li>
+                            <li><a href="#entrega">Entregas</a></li>
+                            <li><a href="#avaliacao">Avaliação</a></li>
+                            <li><a href="#dicas">Dicas</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Recursos</h3>
+                        <ul>
+                            <li><a href="#">Material de Apoio</a></li>
+                            <li><a href="#">Tutoriais</a></li>
+                            <li><a href="#">Biblioteca de Modelos</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Contato</h3>
+                        <ul class="contact-info">
+                            <li><i class="fas fa-map-marker-alt"></i> Rua 14 de Julho 1461 - Centro</li>
+                            <li><i class="fas fa-phone"></i>  (67) 98221-2797</li>
+                            <li><i class="fas fa-envelope"></i> treinacamp@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2025 TreinaCamp - Todos os direitos reservados</p>
+                <button id="gabarito-btn" class="gabarito-button">Ver Gabarito (Apenas para o Professor)</button>
+            </div>
+        </div>
+    </footer>
+    
+    <div id="gabarito-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Gabarito do Projeto</h2>
+            <p>Este gabarito serve como referência visual e pode ser mostrado ao aluno após a conclusão do projeto.</p>
+            
+            <div class="gabarito-tabs">
+                <button class="gabarito-tab active" data-tab="logo-gabarito">Logomarca</button>
+                <button class="gabarito-tab" data-tab="cartao-gabarito">Cartão</button>
+                <button class="gabarito-tab" data-tab="flyer-gabarito">Flyer</button>
+                <button class="gabarito-tab" data-tab="capa-gabarito">Capa Social</button>
+                <button class="gabarito-tab" data-tab="manual-gabarito">Manual</button>
+            </div>
+            
+            <div class="gabarito-content">
+                <div class="gabarito-pane active" id="logo-gabarito">
+                    <div class="gabarito-preview">
+                        <img src="/api/placeholder/500/300" alt="Gabarito do Logo">
+                    </div>
+                    <div class="gabarito-notes">
+                        <h3>Observações sobre o Logo:</h3>
+                        <ul>
+                            <li>Utilização de formas geométricas para simbolizar folhas e sustentabilidade</li>
+                            <li>Aplicação correta de cores (tons de verde com contraste em marrom)</li>
+                            <li>Tipografia moderna e clean para o texto "EcoVerde"</li>
+                            <li>Demonstração da versão monocromática com preservação de legibilidade</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="gabarito-pane" id="cartao-gabarito">
+                    <div class="gabarito-preview">
+                        <img src="/api/placeholder/500/300" alt="Gabarito do Cartão">
+                    </div>
+                    <div class="gabarito-notes">
+                        <h3>Observações sobre o Cartão:</h3>
+                        <ul>
+                            <li>Alinhamento correto dos elementos</li>
+                            <li>Uso de sombra sutil no logo para destacá-lo</li>
+                            <li>Consistência visual com as cores da marca</li>
+                            <li>Informações de contato organizadas e de fácil leitura</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="gabarito-pane" id="flyer-gabarito">
+                    <div class="gabarito-preview">
+                        <img src="/api/placeholder/500/300" alt="Gabarito do Flyer">
+                    </div>
+                    <div class="gabarito-notes">
+                        <h3>Observações sobre o Flyer:</h3>
+                        <ul>
+                            <li>Aplicação correta do degradê radial no fundo</li>
+                            <li>Uso de PowerClip para inserir imagem dentro de forma</li>
+                            <li>Efeito de extrusão aplicado no título para destaque</li>
+                            <li>Integração harmoniosa dos elementos visuais e textuais</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="gabarito-pane" id="capa-gabarito">
+                    <div class="gabarito-preview">
+                        <img src="/api/placeholder/500/200" alt="Gabarito da Capa Social">
+                    </div>
+                    <div class="gabarito-notes">
+                        <h3>Observações sobre a Capa Social:</h3>
+                        <ul>
+                            <li>Respeito à área de segurança para visualização em diferentes dispositivos</li>
+                            <li>Aplicação de transparência e sobreposição de elementos</li>
+                            <li>Uso do padrão personalizado no fundo</li>
+                            <li>Integração harmoniosa com os demais elementos da identidade visual</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="gabarito-pane" id="manual-gabarito">
+                    <div class="gabarito-preview">
+                        <img src="/api/placeholder/500/300" alt="Gabarito do Manual">
+                    </div>
+                    <div class="gabarito-notes">
+                        <h3>Observações sobre o Manual:</h3>
+                        <ul>
+                            <li>Organização clara das informações em grid</li>
+                            <li>Apresentação completa dos elementos da identidade</li>
+                            <li>Exemplos claros de uso correto e incorreto</li>
+                            <li>Documentação adequada das cores e fontes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="progress-indicator">
+        <div class="progress-bar"></div>
+    </div>
+    
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>
