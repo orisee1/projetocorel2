@@ -2031,3 +2031,46 @@ section {
     }
 }
 
+
+/* ... existing code ... */
+.video-expanded-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 1101;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-expanded-wrapper {
+    width: 90vw; /* Usa a largura da tela para responsividade */
+    max-width: 1120px; /* Define uma largura máxima maior */
+}
+
+.video-expanded-frame {
+    position: relative;
+    padding-top: 56.25%; /* Proporção de 16:9 para o vídeo */
+    height: 0;
+    background-color: #000;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+#expanded-video-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.close-video-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+/* ... existing code ... */
