@@ -79,7 +79,7 @@
                 <li><a href="#components">Componentes</a></li>
                 <li><a href="#entrega">Entregas</a></li>
                 <li><a href="#avaliacao">Avaliação</a></li>
-                <li><a href="#diicas</a></li>
+                <li><a href="#diicas">Dicas</a></li>
                 <li><a href="#recursos">Recursos</a></li>
             </ul>
         </div>
@@ -1036,22 +1036,22 @@
         <p>Selecione um dos tutoriais abaixo para aprender técnicas essenciais para o seu projeto:</p>
         
         <div class="tutoriais-grid">
-  <div class="tutorial-item" data-video="https://www.youtube.com/embed/tS4asqQDm0U">
-    <div class="tutorial-frame">
-      <div class="tutorial-thumbnail">
-        <img src="recursos/cartaoimg.png" alt="Tutorial sobre Cartão de Visitas">
-        <div class="play-icon">
-          <i class="fas fa-play-circle"></i>
-        </div>
-      </div>
-      <div class="corel-icon"></div>
-    </div>
-    <h3>Tutorial de Cartão de Visitas</h3>
-  </div>
-</div>
-
+            <!-- Item 1: Cartão de Visitas -->
+            <div class="tutorial-item" data-video="https://player.vimeo.com/video/1121524412?h=4ab9a346ba&autoplay=1">
+                <div class="tutorial-frame">
+                    <div class="tutorial-thumbnail">
+                        <img src="recursos/cartaoimg.png" alt="Tutorial sobre Cartão de Visitas">
+                        <div class="play-icon">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                    </div>
+                    <div class="corel-icon"></div>
+                </div>
+                <h3>Tutorial de Cartão de Visitas</h3>
+            </div>
             
-            <div class="tutorial-item" data-video="https://youtu.be/laLWYmdnTUE">
+            <!-- Item 2: Logomarca -->
+            <div class="tutorial-item" data-video="https://player.vimeo.com/video/1121522983?h=280dbbc03a&autoplay=1">
                 <div class="tutorial-frame">
                     <div class="tutorial-thumbnail">
                         <img src="recursos\logoimg.png" alt="Tutorial sobre Logomarca">
@@ -1064,7 +1064,8 @@
                 <h3>Tutorial de Logomarca</h3>
             </div>
             
-            <div class="tutorial-item" data-video="https://youtu.be/KvKPpm25ycQ">
+            <!-- Item 3: Flyer -->
+            <div class="tutorial-item" data-video="https://player.vimeo.com/video/1121522155?h=aedd0cbd21&autoplay=1">
                 <div class="tutorial-frame">
                     <div class="tutorial-thumbnail">
                         <img src="recursos\flyerimg.png" alt="Tutorial sobre Flyer">
@@ -1078,13 +1079,11 @@
             </div>
         </div>
         
+        <!-- Container do Vídeo Expandido -->
         <div class="video-expanded-container" style="display: none;">
             <div class="video-expanded-wrapper">
                 <div class="video-expanded-frame">
-                    <video controls width="100%" id="expanded-video">
-                        <source src="" type="video/mp4">
-                        Seu navegador não suporta a reprodução de vídeos.
-                    </video>
+                    <iframe id="expanded-video-iframe" width="100%" height="100%" src="" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                     <div class="corel-icon large"></div>
                 </div>
                 <button class="close-video-btn"><i class="fas fa-times"></i> Fechar Vídeo</button>
@@ -1092,6 +1091,7 @@
         </div>
     </div>
 </div>
+
 
                     <div class="recurso-card">
                         <div class="recurso-icon">
@@ -1328,8 +1328,3 @@
 </body>
 
 </html>
-
-
-
-
-
