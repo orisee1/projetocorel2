@@ -152,25 +152,30 @@ document.addEventListener('DOMContentLoaded', function() {
     // Gabarito Modal
     const gabaritoBtm = document.getElementById('gabarito-btn');
     const gabaritoModal = document.getElementById('gabarito-modal');
-    const closeModal = document.querySelector('.close-modal');
+    const closeModalButtons = document.querySelectorAll('.close-modal');
     
     if (gabaritoBtm) {
         gabaritoBtm.addEventListener('click', function() {
-            gabaritoModal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
+            if (gabaritoModal) {
+                gabaritoModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
         });
     }
     
-    if (closeModal) {
-        closeModal.addEventListener('click', function() {
-            gabaritoModal.style.display = 'none';
+    closeModalButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const modal = this.closest('.modal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
             document.body.style.overflow = 'auto';
         });
-    }
+    });
     
     window.addEventListener('click', function(e) {
-        if (e.target === gabaritoModal) {
-            gabaritoModal.style.display = 'none';
+        if (e.target.classList.contains('modal')) {
+            e.target.style.display = 'none';
             document.body.style.overflow = 'auto';
         }
     });
@@ -180,13 +185,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     gabaritTabs.forEach(tab => {
         tab.addEventListener('click', function() {
-            // Remove active class from all tabs
             gabaritTabs.forEach(t => t.classList.remove('active'));
-            
-            // Add active class to clicked tab
             this.classList.add('active');
             
-            // Show corresponding gabarito content
             const tabId = this.getAttribute('data-tab');
             const panes = document.querySelectorAll('.gabarito-pane');
             panes.forEach(pane => pane.classList.remove('active'));
@@ -232,20 +233,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Add initial styles for animation
     animatedElements.forEach(element => {
         element.style.opacity = '0';
         element.style.transform = 'translateY(30px)';
         element.style.transition = 'all 0.5s ease';
     });
     
-    // Check animations on load and scroll
     window.addEventListener('load', checkAnimations);
     window.addEventListener('scroll', checkAnimations);
     
     // Sticky navigation on scroll
     const mainNav = document.querySelector('.main-nav');
-    const hero = document.querySelector('.hero');
     
     function stickyNav() {
         if (window.scrollY > 100) {
@@ -258,99 +256,90 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     window.addEventListener('scroll', stickyNav);
-});
 
-// Biblioteca Digital Modal
-const bibliotecaBtn = document.querySelector('.recurso-link');
-const bibliotecaModal = document.getElementById('biblioteca-modal');
+    // Biblioteca Digital Modal
+    const recursoLinks = document.querySelectorAll('.recurso-link');
+    const bibliotecaBtn = recursoLinks[0];
+    const bibliotecaModal = document.getElementById('biblioteca-modal');
 
-if (bibliotecaBtn) {
-    bibliotecaBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        bibliotecaModal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    });
-}
-
-// Fechar modal da biblioteca
-document.querySelectorAll('.close-modal').forEach(closeBtn => {
-    closeBtn.addEventListener('click', function() {
-        document.querySelectorAll('.modal').forEach(modal => {
-            modal.style.display = 'none';
+    if (bibliotecaBtn) {
+        bibliotecaBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (bibliotecaModal) {
+                bibliotecaModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
         });
-        document.body.style.overflow = 'auto';
-    });
-});
+    }
 
-// Clicar fora do modal para fechar
-window.addEventListener('click', function(e) {
-    document.querySelectorAll('.modal').forEach(modal => {
-        if (e.target === modal) {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
+    // Biblioteca Digital Tabs
+    const bibliotecaTabs = document.querySelectorAll('.biblioteca-tab');
+
+    bibliotecaTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            bibliotecaTabs.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            
+            const tabId = this.getAttribute('data-tab');
+            const panes = document.querySelectorAll('.biblioteca-pane');
+            panes.forEach(pane => pane.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
+
+    // --- LÓGICA DOS TUTORIAIS (MODIFICADO) ---
+    const tutoriaisBtn = recursoLinks[1]; // O segundo link é para os tutoriais
+    const tutoriaisModal = document.getElementById('tutoriais-modal');
+    const tutorialItems = document.querySelectorAll('.tutorial-item');
+    const videoExpandedContainer = document.querySelector('.video-expanded-container');
+    const expandedVideoIframe = document.getElementById('expanded-video-iframe'); // Alterado para o iframe
+    const closeVideoBtn = document.querySelector('.close-video-btn');
+
+    // Abrir modal de tutoriais
+    if (tutoriaisBtn) {
+        tutoriaisBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (tutoriaisModal) {
+                tutoriaisModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    }
+
+    // Expandir vídeo ao clicar em um tutorial
+    tutorialItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const videoSrc = this.getAttribute('data-video');
+            if (expandedVideoIframe) {
+                expandedVideoIframe.src = videoSrc;
+            }
+            if (videoExpandedContainer) {
+                videoExpandedContainer.style.display = 'flex';
+            }
+        });
+    });
+
+    // Função para fechar o vídeo
+    function closeVideoPlayer() {
+        if (expandedVideoIframe) {
+            expandedVideoIframe.src = ''; // Limpa o src para parar o vídeo
         }
-    });
-});
+        if (videoExpandedContainer) {
+            videoExpandedContainer.style.display = 'none';
+        }
+    }
 
-// Biblioteca Digital Tabs
-const bibliotecaTabs = document.querySelectorAll('.biblioteca-tab');
+    // Fechar vídeo expandido pelo botão
+    if (closeVideoBtn) {
+        closeVideoBtn.addEventListener('click', closeVideoPlayer);
+    }
 
-bibliotecaTabs.forEach(tab => {
-    tab.addEventListener('click', function() {
-        // Remove active class from all tabs
-        bibliotecaTabs.forEach(t => t.classList.remove('active'));
-        
-        // Add active class to clicked tab
-        this.classList.add('active');
-        
-        // Show corresponding biblioteca content
-        const tabId = this.getAttribute('data-tab');
-        const panes = document.querySelectorAll('.biblioteca-pane');
-        panes.forEach(pane => pane.classList.remove('active'));
-        document.getElementById(tabId).classList.add('active');
-    });
-});
-
-// Tutoriais Modal
-const tutoriaisBtn = document.querySelectorAll('.recurso-link')[1]; // Seleciona o segundo link com classe recurso-link
-const tutoriaisModal = document.getElementById('tutoriais-modal');
-const tutorialItems = document.querySelectorAll('.tutorial-item');
-const videoExpandedContainer = document.querySelector('.video-expanded-container');
-const expandedVideo = document.getElementById('expanded-video');
-const closeVideoBtn = document.querySelector('.close-video-btn');
-
-// Abrir modal de tutoriais
-if (tutoriaisBtn) {
-    tutoriaisBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        tutoriaisModal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    });
-}
-
-// Expandir vídeo ao clicar em um tutorial
-tutorialItems.forEach(item => {
-    item.addEventListener('click', function() {
-        const videoSrc = this.getAttribute('data-video');
-        expandedVideo.querySelector('source').src = videoSrc;
-        expandedVideo.load();
-        videoExpandedContainer.style.display = 'flex';
-        setTimeout(() => {
-            expandedVideo.play();
-        }, 300);
-    });
-});
-
-// Fechar vídeo expandido
-closeVideoBtn.addEventListener('click', function() {
-    expandedVideo.pause();
-    videoExpandedContainer.style.display = 'none';
-});
-
-// Fechar vídeo ao clicar fora dele
-videoExpandedContainer.addEventListener('click', function(e) {
-    if (e.target === videoExpandedContainer) {
-        expandedVideo.pause();
-        videoExpandedContainer.style.display = 'none';
+    // Fechar vídeo ao clicar fora dele
+    if (videoExpandedContainer) {
+        videoExpandedContainer.addEventListener('click', function(e) {
+            if (e.target === videoExpandedContainer) {
+                closeVideoPlayer();
+            }
+        });
     }
 });
